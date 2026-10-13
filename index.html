@@ -44,7 +44,22 @@ h3{font-size:18px;margin:12px 0 2px}.sub{color:var(--mut);font-size:12.5px}
 .cell .l{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.7px}.cell .v{font-size:13.5px;font-weight:600;margin-top:3px;font-variant-numeric:tabular-nums}
 .btns{display:flex;gap:10px;margin-top:14px}.btn{flex:1;text-align:center;padding:13px;border-radius:12px;font-weight:700;font-size:14px}
 .p{background:var(--gold);color:#021f33}.s{border:1px solid rgba(142,160,196,.4)}
+/* search & filters */
+.srch{display:flex;align-items:center;gap:8px;background:var(--navy2);border:1px solid rgba(79,159,209,.35);border-radius:12px;padding:0 12px}
+.srch input{flex:1;background:none;border:0;color:var(--txt);font:inherit;font-size:14px;padding:10px 0;outline:none}.srch input::placeholder{color:var(--mut)}
+.srch .clr{color:var(--mut);font-size:14px;display:none}
+.fsel{appearance:none;-webkit-appearance:none;font:inherit;font-size:12.5px;font-weight:600;padding:7px 26px 7px 12px;border-radius:999px;background:rgba(10,49,80,.95) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238ea0c4' fill='none' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 10px center;border:1px solid rgba(142,160,196,.3);color:var(--txt);flex:none}
+.fsel.act{background-color:var(--gold);color:#021f33;border-color:var(--gold)}
+.res{margin-top:8px;font-size:11.5px;color:var(--mut)}.res b{color:var(--gold)}
+.tagrow{display:grid;grid-template-columns:1.3fr 1fr .8fr;gap:8px;margin-top:10px}
 /* pilot */
+.fld{margin-top:10px}.fld label{display:block;font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}.fld label i{color:var(--gold);font-style:normal}.fld label small{text-transform:none;letter-spacing:0}
+.fld select,.fld input{width:100%;font:inherit;font-size:14.5px;font-weight:600;color:var(--txt);background:var(--navy2);border:1px solid rgba(79,159,209,.3);border-radius:12px;padding:11px 12px;outline:none;appearance:none;-webkit-appearance:none}
+.fld select{background:var(--navy2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ebb54a' fill='none' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right 12px center}
+.fld select:invalid{color:var(--mut);font-weight:400}.fld input::placeholder{color:var(--mut);font-weight:400}
+.fld.err select{border-color:#ff3b3b;box-shadow:0 0 0 3px rgba(255,59,59,.2)}.emsg{display:none;color:#ff6b6b;font-size:12px;font-weight:600;margin-top:5px}.fld.err .emsg{display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
 .page{position:absolute;inset:0;overflow-y:auto;padding:4px 16px 110px;display:none}.page.on{display:block}
 .lbl{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;margin:12px 0 6px;display:flex;justify-content:space-between}.lbl a{color:var(--gold);text-transform:none;letter-spacing:0;font-weight:600;font-size:12px}
 .card{background:var(--navy2);border:1px solid rgba(79,159,209,.3);border-radius:12px;padding:10px 12px}
@@ -71,22 +86,29 @@ h3{font-size:18px;margin:12px 0 2px}.sub{color:var(--mut);font-size:12.5px}
 
 <section class="view on" id="vU">
 <div id="map"></div>
-<div class="uov"><div class="job"><span style="color:var(--gold)">⚡</span><div><div class="l">Job · Example data</div><div class="v">Hancock-Wood Co-op — Cir. 12 — Oct 2026</div></div><span style="margin-left:auto;color:var(--mut)">⌄</span></div>
-<div class="chips"><div class="chip on">📅 Oct 5–9, 2026</div><div class="chip or"><span class="dot" style="background:#ff3b3b"></span>High 3</div><div class="chip or"><span class="dot" style="background:var(--orange)"></span>Med 9</div><div class="chip"><span class="dot" style="background:#ffd23f"></span>Low 14</div><div class="chip">All photos</div></div></div>
+<div class="uov"><div class="srch"><span style="color:var(--gold)">🔍</span><input id="q" type="search" placeholder="Search circuit, territory, pole #" autocomplete="off" aria-label="Search circuit, territory, pole number"><button class="clr" id="qClr" aria-label="Clear search">✕</button></div>
+<div class="chips"><select class="fsel" id="fTerr" aria-label="Territory"></select><select class="fsel" id="fCir" aria-label="Circuit"></select><div class="chip on">📅 Oct 5–9, 2026</div><div class="chip or"><span class="dot" style="background:#ff3b3b"></span>High</div><div class="chip or"><span class="dot" style="background:var(--orange)"></span>Med</div></div>
+<div class="res" id="res"></div></div>
 <div class="hint" id="hint">Tap a pin to see the photo</div>
 <div class="stats"><div><b id="sPh">412</b><small>Photos</small></div><div><b>58</b><small>Poles</small></div><div><b>6.4 mi</b><small>Line flown</small></div><div><b style="color:var(--orange)">26</b><small>Findings</small></div></div>
 <div class="sheet" id="sheet"><div class="grab"></div><button class="x" id="closeSheet" onclick="closeSheet()" aria-label="Close">✕</button>
 <div class="photo"><div>🖼 <span id="dFile">DJI_0417.JPG</span> · 48 MP</div><div class="bad" id="dBadge">⚠ FINDING</div></div>
-<h3 id="dPole">Pole HW-12-0347</h3><div class="sub">Phase B · 7.2 kV · Temperance, MI (example)</div>
+<h3 id="dPole">Pole HW-12-0347</h3><div class="sub">Phase B · 7.2 kV · Monroe County, MI (example)</div>
 <div class="issue" id="dIssue"></div>
+<div class="g2" style="grid-template-columns:1fr"><div class="cell"><div class="l">Company</div><div class="v" id="dCo"></div></div></div>
+<div class="g2" style="margin-top:10px"><div class="cell"><div class="l">Territory</div><div class="v" id="dTerr"></div></div><div class="cell"><div class="l">Circuit</div><div class="v" id="dCir"></div></div></div>
 <div class="g2"><div class="cell"><div class="l">GPS</div><div class="v" id="dGps"></div></div><div class="cell"><div class="l">Captured</div><div class="v" id="dTime"></div></div><div class="cell"><div class="l">Pilot</div><div class="v">J. Kowalski<br><span style="color:var(--mut);font-size:11px">Part 107 (example)</span></div></div><div class="cell"><div class="l">Aircraft / Alt</div><div class="v">M30T · 38 ft AGL</div></div></div>
 <div class="btns"><button class="btn s" onclick="closeSheet()">Close</button><button class="btn p">Create Work Order</button></div></div>
 </section>
 
 <section class="view" id="vP">
 <div class="page on" id="pUpload">
-<div class="lbl">New Upload · Job <a>+ New job</a></div>
-<div class="card pj"><span style="color:var(--gold);font-size:18px">⚡</span><div>Hancock-Wood Co-op — Cir. 12 — Oct 2026<small>Distribution · 58 poles · Temperance, MI</small></div><span style="margin-left:auto;color:var(--mut)">⌄</span></div>
+<div class="lbl">New Upload · Tag these photos</div>
+<div class="fld" id="fCoWrap"><label for="pCo">Power company <i>*</i></label><select id="pCo" required><option value="" disabled selected>Select power company</option><option>DTE Energy</option><option>Consumers Energy</option><option>Toledo Edison (FirstEnergy)</option><option>Hancock-Wood Electric Co-op</option></select><div class="emsg" id="coErr">⚠ Required — choose a power company</div></div>
+<div class="two"><div class="fld"><label for="pTerr">Territory <small>(optional)</small></label><input id="pTerr" list="terrList" placeholder="e.g. Bedford Twp" autocomplete="off"></div>
+<div class="fld"><label for="pCir">Circuit <small>(optional)</small></label><input id="pCir" list="cirList" placeholder="e.g. Cir. 12" autocomplete="off"></div></div>
+<datalist id="terrList"><option>Bedford Twp</option><option>Erie Twp</option><option>Monroe North</option><option>Lambertville</option><option>Ida Twp</option></datalist>
+<datalist id="cirList"><option>Cir. 7</option><option>Cir. 12</option><option>Cir. 14</option><option>Cir. 21</option></datalist>
 <div class="lbl">Select photos <a>Add more</a></div><div class="grid" id="grid"></div>
 <div class="cnt"><span>214</span> photos selected · 9.8 GB</div>
 <div class="card note w"><span class="i">📍</span><div><b>GPS found in 212 of 214 photos.</b><br><span style="color:#ffb27a">2 have no location</span> <span style="color:var(--mut)">— they'll upload without a map pin.</span></div></div>
@@ -94,7 +116,7 @@ h3{font-size:18px;margin:12px 0 2px}.sub{color:var(--mut);font-size:12.5px}
 <div class="tags" id="tags"><button class="tg">None</button><button class="tg on">Cracked insulator · Med</button><button class="tg">Vegetation</button><button class="tg">Leaning pole</button><button class="tg">Bird nest</button></div>
 </div>
 <div class="page" id="pUploading">
-<div class="lbl" id="upTitle">Uploading… · Hancock-Wood Co-op — Cir. 12</div>
+<div class="lbl" id="upTitle">Uploading…</div>
 <div class="pct"><b id="pct">0%</b><span><b id="nDone" style="font-size:15px;color:var(--txt)">0</b> of 214 photos done</span></div>
 <div class="bar"><i id="barI"></i></div>
 <div class="row"><span id="gb">0.0 of 9.8 GB</span><span id="eta">~4 min left</span></div>
@@ -119,14 +141,33 @@ const tiles=()=>L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/service
 const map=L.map('map',{zoomControl:false}).setView([41.7735,-83.5665],14);tiles().addTo(map);
 L.polyline(route,{color:'#9fd0f0',weight:3}).addTo(map);
 const sev='nlmmnnhlnmnlnhm';let selM=null,uPins=[];
-function addUPin(ll,s,i,isNew){const m=L.marker(ll,{icon:icon(col[s],isNew?'new':'')}).addTo(map);m.on('click',()=>openSheet(m,ll,s,i));uPins.push(m);return m}
+const HW='Hancock-Wood Electric Co-op';
+// example tags: pins 0-5 Bedford Twp/Cir. 12, 6-10 Erie Twp/Cir. 14, 11-14 Monroe North/Cir. 7
+const tagOf=i=>i<6?['Bedford Twp','Cir. 12']:i<11?['Erie Twp','Cir. 14']:['Monroe North','Cir. 7'];
+function addUPin(ll,s,i,isNew,t){const m=L.marker(ll,{icon:icon(col[s],isNew?'new':'')}).addTo(map);
+m.d=Object.assign({co:HW,terr:tagOf(i)[0],cir:tagOf(i)[1],pole:'HW-12-0'+(331+i)},t||{});
+m.on('click',()=>openSheet(m,ll,s,i));uPins.push(m);return m}
 for(let i=0;i<15;i++){const f=1.4+i*0.27;addUPin(along(f),sev[i],i)}
-[[[41.7880,-83.5835],42],[[41.7590,-83.5505],37]].forEach(([ll,n])=>L.marker(ll,{icon:L.divIcon({className:'',html:`<div class="cl">${n}</div>`,iconSize:[42,42],iconAnchor:[21,21]})}).addTo(map).on('click',()=>map.flyTo(ll,16)));
+const clusters=[[[41.7880,-83.5835],42],[[41.7590,-83.5505],37]].map(([ll,n])=>L.marker(ll,{icon:L.divIcon({className:'',html:`<div class="cl">${n}</div>`,iconSize:[42,42],iconAnchor:[21,21]})}).addTo(map).on('click',()=>map.flyTo(ll,16)));
+const norm=s=>(s||'').toLowerCase().replace(/[^a-z0-9]/g,'').replace(/^circuit/,'cir');
+function fillSel(){const mk=(id,key,lab)=>{const el=$(id),cur=el.value,vals=[...new Set(uPins.map(m=>m.d[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+el.innerHTML=`<option value="">${lab}: All</option>`+vals.map(v=>`<option value="${v}">${lab}: ${v}</option>`).join('');el.value=vals.includes(cur)?cur:''};
+mk('fTerr','terr','Territory');mk('fCir','cir','Circuit')}
+function applyFilter(){const q=norm($('q').value),t=$('fTerr').value,c=$('fCir').value;let n=0;
+uPins.forEach(m=>{const d=m.d,hay=norm(d.co)+'|'+norm(d.terr)+'|'+norm(d.cir)+'|'+norm(d.pole)+'|'+norm('pole'+d.pole);
+const ok=(!t||d.terr==t)&&(!c||d.cir==c)&&(!q||hay.includes(q)||norm(d.cir).replace('cir','')==q);
+if(ok){n++;if(!map.hasLayer(m))m.addTo(map)}else if(map.hasLayer(m)){if(m==selM)closeSheet();map.removeLayer(m)}});
+const any=q||t||c;clusters.forEach(k=>any?map.removeLayer(k):(!map.hasLayer(k)&&k.addTo(map)));
+$('fTerr').classList.toggle('act',!!t);$('fCir').classList.toggle('act',!!c);$('qClr').style.display=$('q').value?'block':'none';
+$('res').innerHTML=any?`Showing <b>${n}</b> of ${uPins.length} pins`+(n?'':' — no matches'):`<b>${uPins.length}</b> pins + 2 clusters · all territories & circuits`;
+if(any&&n){map.fitBounds(L.latLngBounds(uPins.filter(m=>map.hasLayer(m)).map(m=>m.getLatLng())).pad(.3),{paddingTopLeft:[0,170],paddingBottomRight:[0,90],maxZoom:16})}}
+$('q').addEventListener('input',applyFilter);$('fTerr').onchange=applyFilter;$('fCir').onchange=applyFilter;$('qClr').onclick=()=>{$('q').value='';applyFilter()};
+fillSel();applyFilter();
 function openSheet(m,ll,s,i){if(selM)selM.setIcon(icon(selM._c));m._c=col[s];m.setIcon(icon(col[s],'sel'));selM=m;
 const [t,lv]=issues[s];$('dIssue').innerHTML=`<span class="dot" style="background:${col[s]};margin:0"></span>${t}${s=='n'?'':' — '+lv}`;
 $('dIssue').style.cssText=`color:${s=='n'?'#9fd0f0':col[s]};border:1px solid ${col[s]};background:${col[s]}22`;
 $('dBadge').textContent=s=='n'?'✓ OK':'⚠ FINDING';$('dBadge').style.background=s=='n'?'#4f9fd1':col[s];
-$('dPole').textContent='Pole HW-12-0'+(331+i);$('dFile').textContent='DJI_0'+(401+i*3)+'.JPG';
+$('dPole').textContent='Pole '+m.d.pole;$('dCo').textContent=m.d.co;$('dTerr').textContent=m.d.terr||'—';$('dCir').textContent=m.d.cir||'—';$('dFile').textContent='DJI_0'+(401+i*3)+'.JPG';
 $('dGps').innerHTML=`${ll[0].toFixed(5)}° N<br>${Math.abs(ll[1]).toFixed(5)}° W`;$('dTime').innerHTML=`Oct 7, 2026<br>${10+(i>>2)}:${String(12+i*3).padStart(2,'0')} AM ET`;
 $('sheet').classList.add('open');$('hint').style.display='none';map.panTo([ll[0]-0.004,ll[1]])}
 function closeSheet(){$('sheet').classList.remove('open');if(selM){selM.setIcon(icon(selM._c));selM=null}}
@@ -139,7 +180,11 @@ let pmap=null,timer=null,state='upload';
 function btns(){$('upBtn').style.display=state=='upload'?'block':'none';$('pauseBtn').style.display=state=='uploading'?'block':'none';$('viewBtn').style.display=state=='done'?'block':'none'}
 function go(v){$('tabU').classList.toggle('on',v=='utility');$('tabP').classList.toggle('on',v=='pilot');$('vU').classList.toggle('on',v=='utility');$('vP').classList.toggle('on',v=='pilot');
 if(v=='utility')setTimeout(()=>map.invalidateSize(),0);else{btns();if(pmap)setTimeout(()=>pmap.invalidateSize(),0)}}
-function startUpload(){state='uploading';$('pUpload').classList.remove('on');$('pUploading').classList.add('on');btns();
+let pick=null;
+$('pCo').onchange=()=>$('fCoWrap').classList.remove('err');
+function startUpload(){const co=$('pCo').value;if(!co){$('fCoWrap').classList.add('err');$('pCo').focus();$('pUpload').scrollTo({top:0,behavior:'smooth'});return}
+pick={co,terr:$('pTerr').value.trim(),cir:$('pCir').value.trim()};
+$('upTitle').textContent='Uploading… · '+[co,pick.terr,pick.cir].filter(Boolean).join(' · ');state='uploading';$('pUpload').classList.remove('on');$('pUploading').classList.add('on');btns();
 if(!pmap){pmap=L.map('pmap',{zoomControl:false,attributionControl:false}).setView([41.7740,-83.5660],14);tiles().addTo(pmap);L.polyline(route,{color:'#9fd0f0',weight:3,dashArray:'6 6'}).addTo(pmap)}
 let p=0,placed=[];const total=14;
 timer=setInterval(()=>{p=Math.min(100,p+1.25);const n=Math.round(214*p/100);
@@ -147,9 +192,9 @@ $('pct').textContent=Math.round(p)+'%';$('barI').style.width=p+'%';$('nDone').te
 const want=Math.floor(p/100*total);while(placed.length<want){const i=placed.length;placed.forEach(m=>m.setIcon(L.divIcon({className:'',html:`<div class="pin sm" style="background:${m._c}"></div>`,iconSize:[18,18],iconAnchor:[9,22]})));
 const c=col[sev[i%sev.length]];const m=L.marker(along(1+i*0.4),{icon:L.divIcon({className:'',html:`<div class="pin sm new" style="background:${c}"></div>`,iconSize:[18,18],iconAnchor:[9,22]})}).addTo(pmap);m._c=c;placed.push(m)}
 $('pinsN').textContent=Math.round(212*p/100)+' pins placed';
-if(p>=100){clearInterval(timer);state='done';$('upTitle').textContent='Upload complete · Hancock-Wood Co-op — Cir. 12';$('bgNote').style.display='none';$('doneNote').style.display='flex';btns()}},80)}
+if(p>=100){clearInterval(timer);state='done';$('upTitle').textContent='Upload complete · '+[pick.co,pick.terr,pick.cir].filter(Boolean).join(' · ');$('bgNote').style.display='none';$('doneNote').style.display='flex';btns()}},80)}
 let added=false;
-function viewOnMap(){if(!added){added=true;$('sPh').textContent='626';for(let i=0;i<3;i++)addUPin(along(5.6+i*0.3),'nmn'[i],20+i,true)}
-go('utility');map.flyTo(along(5.9),15)}
+function viewOnMap(){if(!added){added=true;$('sPh').textContent='626';for(let i=0;i<3;i++)addUPin(along(5.6+i*0.3),'nmn'[i],20+i,true,{co:pick.co,terr:pick.terr,cir:pick.cir,pole:'NEW-0'+(1+i)})}
+go('utility');fillSel();$('q').value='';$('fTerr').value='';$('fCir').value='';applyFilter();map.flyTo(along(5.9),15)}
 btns();
 </script></body></html>
