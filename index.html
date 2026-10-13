@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#021f33"><title>GridView UAS — Demo (example data)</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root{--brand:#053d63;--gold:#ebb54a;--navy:#021f33;--navy2:#0a3150;--blue:#4f9fd1;--orange:#ff7a1a;--txt:#e8eefc;--mut:#8ea0c4}
+*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}
+body{font-family:-apple-system,"SF Pro Text",Inter,Roboto,sans-serif;background:var(--navy);color:var(--txt);-webkit-tap-highlight-color:transparent}
+.app{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column;background:var(--navy)}
+@media (min-width:600px){body{display:grid;place-items:center;background:radial-gradient(circle at 30% 20%,#0a3150,#010f1a 70%)}
+.app{width:390px;height:844px;max-height:calc(100vh - 40px);border-radius:46px;border:10px solid #0b0f14;box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 0 2px #2a3340}}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.hdr{padding:calc(env(safe-area-inset-top) + 12px) 14px 10px;background:var(--navy);border-bottom:1px solid rgba(79,159,209,.18);z-index:1200;position:relative}
+.hrow{display:flex;align-items:center;gap:10px}
+.logo{background:#fff;border-radius:12px;padding:4px 8px;box-shadow:0 2px 10px rgba(0,0,0,.4)}.logo img{height:60px;display:block}
+.tag{font-size:10.5px;color:var(--gold);font-weight:700;letter-spacing:.4px;line-height:1.3}
+.ex{margin-left:auto;font-size:9.5px;font-weight:700;color:var(--gold);border:1px solid var(--gold);border-radius:6px;padding:3px 6px;white-space:nowrap}
+.seg{display:flex;margin-top:10px;background:var(--navy2);border-radius:11px;padding:3px}
+.seg button{flex:1;padding:8px;border-radius:9px;font-weight:700;font-size:13.5px;color:var(--mut)}.seg button.on{background:var(--gold);color:#021f33}
+.view{flex:1;position:relative;display:none;overflow:hidden}.view.on{display:block}
+/* utility */
+#map{position:absolute;inset:0;background:#1b2a1c}
+.uov{position:absolute;top:0;left:0;right:0;z-index:1000;padding:10px 12px 14px;background:linear-gradient(180deg,rgba(2,31,51,.95) 70%,rgba(2,31,51,0))}
+.job{background:var(--navy2);border:1px solid rgba(79,159,209,.35);border-radius:12px;padding:8px 12px;display:flex;align-items:center;gap:10px}
+.job .l{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px}.job .v{font-size:13.5px;font-weight:600}
+.chips{display:flex;gap:8px;margin-top:9px;overflow-x:auto;scrollbar-width:none}.chip{white-space:nowrap;font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:999px;background:rgba(10,49,80,.95);border:1px solid rgba(142,160,196,.3)}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#021f33}.chip.or{border-color:var(--orange);color:var(--orange)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+.stats{position:absolute;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:1000;background:rgba(2,31,51,.94);border-radius:16px;padding:11px 14px;display:flex;justify-content:space-between;border:1px solid rgba(79,159,209,.25)}
+.stats div{text-align:center}.stats b{display:block;font-size:19px}.stats small{font-size:10.5px;color:var(--mut)}
+.hint{position:absolute;left:50%;transform:translateX(-50%);bottom:96px;z-index:1000;font-size:11.5px;background:rgba(0,0,0,.6);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.pin{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.6)}.pin.sm{width:18px;height:18px;border-width:2px}
+.sel{box-shadow:0 0 0 6px rgba(255,122,26,.5)}.new{box-shadow:0 0 0 6px rgba(235,181,74,.55)}
+.cl{width:42px;height:42px;border-radius:50%;background:rgba(79,159,209,.92);border:3px solid rgba(255,255,255,.85);display:grid;place-items:center;font-weight:800;font-size:14px;color:#fff;box-shadow:0 0 0 7px rgba(79,159,209,.3)}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:1100;background:var(--navy);border-radius:22px 22px 0 0;padding:10px 16px calc(20px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(0,0,0,.6);border-top:1px solid rgba(79,159,209,.35);transform:translateY(105%);transition:transform .28s ease;max-height:78%;overflow-y:auto}
+.sheet.open{transform:none}
+.grab{width:40px;height:5px;border-radius:3px;background:#3a4a6d;margin:0 auto 10px}
+.x{position:absolute;z-index:3;top:6px;right:10px;width:32px;height:32px;border-radius:50%;background:var(--navy2);font-size:16px}
+.photo{height:140px;border-radius:14px;position:relative;overflow:hidden;background:repeating-linear-gradient(45deg,#0a2a44 0 12px,#0d3352 12px 24px);display:grid;place-items:center;color:var(--mut);font-size:12px;margin-top:6px}
+.bad{position:absolute;top:10px;left:10px;color:#1a0c00;font-weight:800;font-size:11px;padding:4px 9px;border-radius:6px}
+h3{font-size:18px;margin:12px 0 2px}.sub{color:var(--mut);font-size:12.5px}
+.issue{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:7px 12px;border-radius:999px;font-weight:700;font-size:13px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.cell{background:var(--navy2);border-radius:12px;padding:10px 12px}
+.cell .l{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.7px}.cell .v{font-size:13.5px;font-weight:600;margin-top:3px;font-variant-numeric:tabular-nums}
+.btns{display:flex;gap:10px;margin-top:14px}.btn{flex:1;text-align:center;padding:13px;border-radius:12px;font-weight:700;font-size:14px}
+.p{background:var(--gold);color:#021f33}.s{border:1px solid rgba(142,160,196,.4)}
+/* pilot */
+.page{position:absolute;inset:0;overflow-y:auto;padding:4px 16px 110px;display:none}.page.on{display:block}
+.lbl{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;margin:12px 0 6px;display:flex;justify-content:space-between}.lbl a{color:var(--gold);text-transform:none;letter-spacing:0;font-weight:600;font-size:12px}
+.card{background:var(--navy2);border:1px solid rgba(79,159,209,.3);border-radius:12px;padding:10px 12px}
+.pj{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}.pj small{display:block;color:var(--mut);font-weight:400;font-size:11.5px;margin-top:2px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.th{aspect-ratio:1;border-radius:7px;position:relative}
+.th:after{content:"✓";position:absolute;top:3px;right:3px;width:15px;height:15px;border-radius:50%;background:var(--gold);color:#021f33;font-size:10px;font-weight:900;display:grid;place-items:center}
+.th.ng{outline:2px solid var(--orange)}.th.ng:before{content:"⌀ GPS";position:absolute;bottom:3px;left:3px;font-size:8px;background:var(--orange);color:#1a0c00;padding:1px 3px;border-radius:3px;font-weight:800}
+.th.more{background:var(--navy2);display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--mut)}.th.more:after{display:none}
+.cnt{font-size:15px;font-weight:700;margin:8px 0}.cnt span{color:var(--gold)}
+.note{display:flex;gap:10px;font-size:12.5px;line-height:1.4}.note .i{font-size:16px}.w{border-color:rgba(255,122,26,.6)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}.tg{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(142,160,196,.35)}.tg.on{background:rgba(255,122,26,.15);border-color:var(--orange);color:var(--orange);font-weight:700}
+.big{position:absolute;left:16px;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:5;background:var(--gold);color:#021f33;text-align:center;font-weight:800;font-size:18px;padding:16px;border-radius:14px;box-shadow:0 6px 20px rgba(235,181,74,.3);display:none}
+.big.sec{background:none;color:var(--txt);border:1px solid rgba(142,160,196,.4);box-shadow:none;font-size:16px}
+.bar{height:12px;border-radius:6px;background:#0d2a40;overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#f5cd77);transition:width .2s linear}
+.pct{display:flex;justify-content:space-between;align-items:end}.pct b{font-size:38px}.pct span{color:var(--mut);font-size:13px}
+.row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:var(--mut)}
+#pmap{height:300px;border-radius:14px;margin-top:4px}
+.done{display:none;margin-top:10px;border-color:rgba(91,214,124,.6)}.done b{color:#5bd67c}
+.leaflet-control-attribution{font-size:8px!important;background:rgba(2,31,51,.6)!important;color:#8ea0c4!important}.leaflet-control-attribution a{color:#8ea0c4!important}
+</style></head><body>
+<div class="app" id="app">
+<header class="hdr"><div class="hrow"><div class="logo"><img src="logo.png" alt="GridView UAS Services LLC"></div><div class="tag">SEE IT BEFORE<br>IT FAILS.</div><div class="ex">EXAMPLE DATA</div></div>
+<div class="seg" role="tablist"><button id="tabU" class="on" onclick="go('utility')">Utility view</button><button id="tabP" onclick="go('pilot')">Pilot view</button></div></header>
+
+<section class="view on" id="vU">
+<div id="map"></div>
+<div class="uov"><div class="job"><span style="color:var(--gold)">⚡</span><div><div class="l">Job · Example data</div><div class="v">Hancock-Wood Co-op — Cir. 12 — Oct 2026</div></div><span style="margin-left:auto;color:var(--mut)">⌄</span></div>
+<div class="chips"><div class="chip on">📅 Oct 5–9, 2026</div><div class="chip or"><span class="dot" style="background:#ff3b3b"></span>High 3</div><div class="chip or"><span class="dot" style="background:var(--orange)"></span>Med 9</div><div class="chip"><span class="dot" style="background:#ffd23f"></span>Low 14</div><div class="chip">All photos</div></div></div>
+<div class="hint" id="hint">Tap a pin to see the photo</div>
+<div class="stats"><div><b id="sPh">412</b><small>Photos</small></div><div><b>58</b><small>Poles</small></div><div><b>6.4 mi</b><small>Line flown</small></div><div><b style="color:var(--orange)">26</b><small>Findings</small></div></div>
+<div class="sheet" id="sheet"><div class="grab"></div><button class="x" id="closeSheet" onclick="closeSheet()" aria-label="Close">✕</button>
+<div class="photo"><div>🖼 <span id="dFile">DJI_0417.JPG</span> · 48 MP</div><div class="bad" id="dBadge">⚠ FINDING</div></div>
+<h3 id="dPole">Pole HW-12-0347</h3><div class="sub">Phase B · 7.2 kV · Temperance, MI (example)</div>
+<div class="issue" id="dIssue"></div>
+<div class="g2"><div class="cell"><div class="l">GPS</div><div class="v" id="dGps"></div></div><div class="cell"><div class="l">Captured</div><div class="v" id="dTime"></div></div><div class="cell"><div class="l">Pilot</div><div class="v">J. Kowalski<br><span style="color:var(--mut);font-size:11px">Part 107 (example)</span></div></div><div class="cell"><div class="l">Aircraft / Alt</div><div class="v">M30T · 38 ft AGL</div></div></div>
+<div class="btns"><button class="btn s" onclick="closeSheet()">Close</button><button class="btn p">Create Work Order</button></div></div>
+</section>
+
+<section class="view" id="vP">
+<div class="page on" id="pUpload">
+<div class="lbl">New Upload · Job <a>+ New job</a></div>
+<div class="card pj"><span style="color:var(--gold);font-size:18px">⚡</span><div>Hancock-Wood Co-op — Cir. 12 — Oct 2026<small>Distribution · 58 poles · Temperance, MI</small></div><span style="margin-left:auto;color:var(--mut)">⌄</span></div>
+<div class="lbl">Select photos <a>Add more</a></div><div class="grid" id="grid"></div>
+<div class="cnt"><span>214</span> photos selected · 9.8 GB</div>
+<div class="card note w"><span class="i">📍</span><div><b>GPS found in 212 of 214 photos.</b><br><span style="color:#ffb27a">2 have no location</span> <span style="color:var(--mut)">— they'll upload without a map pin.</span></div></div>
+<div class="lbl">Issue tag (optional, per photo) <a>DJI_0417</a></div>
+<div class="tags" id="tags"><button class="tg">None</button><button class="tg on">Cracked insulator · Med</button><button class="tg">Vegetation</button><button class="tg">Leaning pole</button><button class="tg">Bird nest</button></div>
+</div>
+<div class="page" id="pUploading">
+<div class="lbl" id="upTitle">Uploading… · Hancock-Wood Co-op — Cir. 12</div>
+<div class="pct"><b id="pct">0%</b><span><b id="nDone" style="font-size:15px;color:var(--txt)">0</b> of 214 photos done</span></div>
+<div class="bar"><i id="barI"></i></div>
+<div class="row"><span id="gb">0.0 of 9.8 GB</span><span id="eta">~4 min left</span></div>
+<div class="card note" id="bgNote"><span class="i">🔄</span><div><b>Keeps uploading in the background.</b><br><span style="color:var(--mut)">You can lock your phone or switch apps. We'll notify you when it's done.</span></div></div>
+<div class="card note done" id="doneNote"><span class="i">✅</span><div><b>Upload complete</b><br><span style="color:var(--mut)">214 photos · 212 placed on the map · client notified (example)</span></div></div>
+<div class="lbl">Live preview <a id="pinsN">0 pins placed</a></div><div id="pmap"></div>
+</div>
+<button class="big" id="upBtn" onclick="startUpload()">⬆ Upload 214 photos</button>
+<button class="big sec" id="pauseBtn">Pause upload</button>
+<button class="big" id="viewBtn" onclick="viewOnMap()">View on map</button>
+</section>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const route=[[41.7915,-83.5868],[41.7860,-83.5810],[41.7802,-83.5752],[41.7745,-83.5693],[41.7690,-83.5640],[41.7640,-83.5590],[41.7600,-83.5520],[41.7565,-83.5450]];
+const col={h:'#ff3b3b',m:'#ff7a1a',l:'#ffd23f',n:'#4f9fd1'};
+const issues={h:['Broken crossarm','High'],m:['Cracked insulator','Medium'],l:['Vegetation contact','Low'],n:['No issue found','—']};
+function along(f){const k=Math.min(Math.floor(f),route.length-2),t=f-k;return[route[k][0]+(route[k+1][0]-route[k][0])*t,route[k][1]+(route[k+1][1]-route[k][1])*t]}
+function icon(c,cls=''){return L.divIcon({className:'',html:`<div class="pin ${cls}" style="background:${c}"></div>`,iconSize:[26,26],iconAnchor:[13,30]})}
+const tiles=()=>L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri World Imagery',maxZoom:19});
+// utility map
+const map=L.map('map',{zoomControl:false}).setView([41.7735,-83.5665],14);tiles().addTo(map);
+L.polyline(route,{color:'#9fd0f0',weight:3}).addTo(map);
+const sev='nlmmnnhlnmnlnhm';let selM=null,uPins=[];
+function addUPin(ll,s,i,isNew){const m=L.marker(ll,{icon:icon(col[s],isNew?'new':'')}).addTo(map);m.on('click',()=>openSheet(m,ll,s,i));uPins.push(m);return m}
+for(let i=0;i<15;i++){const f=1.4+i*0.27;addUPin(along(f),sev[i],i)}
+[[[41.7880,-83.5835],42],[[41.7590,-83.5505],37]].forEach(([ll,n])=>L.marker(ll,{icon:L.divIcon({className:'',html:`<div class="cl">${n}</div>`,iconSize:[42,42],iconAnchor:[21,21]})}).addTo(map).on('click',()=>map.flyTo(ll,16)));
+function openSheet(m,ll,s,i){if(selM)selM.setIcon(icon(selM._c));m._c=col[s];m.setIcon(icon(col[s],'sel'));selM=m;
+const [t,lv]=issues[s];$('dIssue').innerHTML=`<span class="dot" style="background:${col[s]};margin:0"></span>${t}${s=='n'?'':' — '+lv}`;
+$('dIssue').style.cssText=`color:${s=='n'?'#9fd0f0':col[s]};border:1px solid ${col[s]};background:${col[s]}22`;
+$('dBadge').textContent=s=='n'?'✓ OK':'⚠ FINDING';$('dBadge').style.background=s=='n'?'#4f9fd1':col[s];
+$('dPole').textContent='Pole HW-12-0'+(331+i);$('dFile').textContent='DJI_0'+(401+i*3)+'.JPG';
+$('dGps').innerHTML=`${ll[0].toFixed(5)}° N<br>${Math.abs(ll[1]).toFixed(5)}° W`;$('dTime').innerHTML=`Oct 7, 2026<br>${10+(i>>2)}:${String(12+i*3).padStart(2,'0')} AM ET`;
+$('sheet').classList.add('open');$('hint').style.display='none';map.panTo([ll[0]-0.004,ll[1]])}
+function closeSheet(){$('sheet').classList.remove('open');if(selM){selM.setIcon(icon(selM._c));selM=null}}
+map.on('click',closeSheet);
+// pilot
+const g=$('grid');for(let i=0;i<15;i++){const d=document.createElement('div');d.className='th'+(i==6||i==11?' ng':'')+(i==14?' more':'');
+if(i<14){d.style.background=`linear-gradient(${i*37}deg,hsl(${200+i*7%40},25%,${22+i%4*4}%),hsl(${100+i*11%40},20%,${30+i%3*5}%) 60%,hsl(60,15%,${42+i%5*3}%))`}else{d.textContent='+200'}g.appendChild(d)}
+document.querySelectorAll('.tg').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tg').forEach(x=>x.classList.remove('on'));b.classList.add('on')});
+let pmap=null,timer=null,state='upload';
+function btns(){$('upBtn').style.display=state=='upload'?'block':'none';$('pauseBtn').style.display=state=='uploading'?'block':'none';$('viewBtn').style.display=state=='done'?'block':'none'}
+function go(v){$('tabU').classList.toggle('on',v=='utility');$('tabP').classList.toggle('on',v=='pilot');$('vU').classList.toggle('on',v=='utility');$('vP').classList.toggle('on',v=='pilot');
+if(v=='utility')setTimeout(()=>map.invalidateSize(),0);else{btns();if(pmap)setTimeout(()=>pmap.invalidateSize(),0)}}
+function startUpload(){state='uploading';$('pUpload').classList.remove('on');$('pUploading').classList.add('on');btns();
+if(!pmap){pmap=L.map('pmap',{zoomControl:false,attributionControl:false}).setView([41.7740,-83.5660],14);tiles().addTo(pmap);L.polyline(route,{color:'#9fd0f0',weight:3,dashArray:'6 6'}).addTo(pmap)}
+let p=0,placed=[];const total=14;
+timer=setInterval(()=>{p=Math.min(100,p+1.25);const n=Math.round(214*p/100);
+$('pct').textContent=Math.round(p)+'%';$('barI').style.width=p+'%';$('nDone').textContent=n;$('gb').textContent=(9.8*p/100).toFixed(1)+' of 9.8 GB';$('eta').textContent=p<100?`~${Math.ceil((100-p)/25)} min left`:'Done';
+const want=Math.floor(p/100*total);while(placed.length<want){const i=placed.length;placed.forEach(m=>m.setIcon(L.divIcon({className:'',html:`<div class="pin sm" style="background:${m._c}"></div>`,iconSize:[18,18],iconAnchor:[9,22]})));
+const c=col[sev[i%sev.length]];const m=L.marker(along(1+i*0.4),{icon:L.divIcon({className:'',html:`<div class="pin sm new" style="background:${c}"></div>`,iconSize:[18,18],iconAnchor:[9,22]})}).addTo(pmap);m._c=c;placed.push(m)}
+$('pinsN').textContent=Math.round(212*p/100)+' pins placed';
+if(p>=100){clearInterval(timer);state='done';$('upTitle').textContent='Upload complete · Hancock-Wood Co-op — Cir. 12';$('bgNote').style.display='none';$('doneNote').style.display='flex';btns()}},80)}
+let added=false;
+function viewOnMap(){if(!added){added=true;$('sPh').textContent='626';for(let i=0;i<3;i++)addUPin(along(5.6+i*0.3),'nmn'[i],20+i,true)}
+go('utility');map.flyTo(along(5.9),15)}
+btns();
+</script></body></html>
