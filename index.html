@@ -44,6 +44,30 @@ h3{font-size:18px;margin:12px 0 2px}.sub{color:var(--mut);font-size:12.5px}
 .cell .l{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.7px}.cell .v{font-size:13.5px;font-weight:600;margin-top:3px;font-variant-numeric:tabular-nums}
 .btns{display:flex;gap:10px;margin-top:14px}.btn{flex:1;text-align:center;padding:13px;border-radius:12px;font-weight:700;font-size:14px}
 .p{background:var(--gold);color:#021f33}.s{border:1px solid rgba(142,160,196,.4)}
+/* auth */
+.auth{position:absolute;inset:0;z-index:3000;background:radial-gradient(circle at 50% 0%,#0a3150,var(--navy) 60%);display:none;overflow-y:auto}.auth.on{display:block}
+.ascr{display:none;padding:calc(env(safe-area-inset-top) + 18px) 22px 28px;min-height:100%;position:relative}.ascr.on{display:block}
+.aex{position:absolute;top:calc(env(safe-area-inset-top) + 14px);right:16px}
+.wlogo{background:#fff;border-radius:22px;padding:12px 18px;margin:44px auto 0;width:max-content;box-shadow:0 10px 40px rgba(0,0,0,.5)}.wlogo img{height:150px;display:block}
+.wtag{text-align:center;color:var(--gold);font-weight:800;font-size:22px;margin-top:20px}.wsub{text-align:center;color:var(--mut);font-size:13px;margin:6px 0 26px}
+.ab{display:block;width:100%;padding:15px;border-radius:14px;font-weight:800;font-size:16.5px;margin-top:12px;text-align:center}.ab.gold{background:var(--gold);color:#021f33;box-shadow:0 6px 20px rgba(235,181,74,.25)}.ab.line{border:1.5px solid var(--gold);color:var(--gold)}
+.asmall{text-align:center;color:var(--mut);font-size:11.5px;margin-top:10px;line-height:1.4}
+.demo{margin-top:22px;border-top:1px dashed rgba(142,160,196,.3);padding-top:14px}.dl{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.db{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;padding:10px 12px;margin-top:7px;border-radius:11px;background:var(--navy2);border:1px solid rgba(79,159,209,.3);font-size:13.5px;font-weight:600}.db small{color:var(--gold);font-size:11px}
+.fine{text-align:center;color:#6f82a6;font-size:10.5px;margin-top:16px;line-height:1.4}
+.back{color:var(--mut);font-size:14px;font-weight:600;padding:4px 0}
+.ahl{display:flex;gap:12px;align-items:center;margin:14px 0 6px}.ahl img{height:62px;background:#fff;border-radius:10px;padding:3px 6px}.ahl h2{font-size:22px}.ahl small{color:var(--mut);font-size:12.5px}
+.arow{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px}.arow a{color:var(--gold);font-weight:600;text-decoration:none}
+.tog{display:flex;align-items:center;gap:8px;color:var(--txt);cursor:pointer}.tog input{display:none}.tog span{width:38px;height:22px;border-radius:11px;background:#2a4058;position:relative;transition:.2s}.tog span:after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}.tog input:checked+span{background:var(--gold)}.tog input:checked+span:after{left:19px}
+.toast{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);background:#0a3150;border:1px solid var(--gold);padding:8px 14px;border-radius:999px;font-size:12.5px;display:none;white-space:nowrap}
+/* header account */
+.av{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);font-weight:800;font-size:13px;flex:none}
+.orgrow{display:flex;align-items:center;gap:8px;margin-top:9px}.orgb{font-size:13px;font-weight:700;background:var(--navy2);border:1px solid rgba(235,181,74,.5);padding:6px 10px;border-radius:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px}
+.role{font-size:10.5px;font-weight:800;color:#021f33;background:var(--gold);padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px}
+.menu{display:none;position:absolute;right:12px;top:calc(100% - 50px);width:240px;background:#0a2a44;border:1px solid rgba(79,159,209,.4);border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.6);padding:6px;z-index:2500}.menu.on{display:block}
+.mh{padding:10px;border-bottom:1px solid rgba(142,160,196,.2);margin-bottom:4px}.mh b{display:block}.mh small{color:var(--mut);font-size:11.5px}
+.mi{display:block;width:100%;text-align:left;padding:11px 10px;border-radius:9px;font-size:14px;font-weight:600}.mi:hover{background:var(--navy2)}.mi.so{color:#ff8a8a}
+.hdr .ex{margin-left:auto}
 /* search & filters */
 .srch{display:flex;align-items:center;gap:8px;background:var(--navy2);border:1px solid rgba(79,159,209,.35);border-radius:12px;padding:0 12px}
 .srch input{flex:1;background:none;border:0;color:var(--txt);font:inherit;font-size:14px;padding:10px 0;outline:none}.srch input::placeholder{color:var(--mut)}
@@ -81,12 +105,46 @@ h3{font-size:18px;margin:12px 0 2px}.sub{color:var(--mut);font-size:12.5px}
 .leaflet-control-attribution{font-size:8px!important;background:rgba(2,31,51,.6)!important;color:#8ea0c4!important}.leaflet-control-attribution a{color:#8ea0c4!important}
 </style></head><body>
 <div class="app" id="app">
-<header class="hdr"><div class="hrow"><div class="logo"><img src="logo.png" alt="GridView UAS Services LLC"></div><div class="tag">SEE IT BEFORE<br>IT FAILS.</div><div class="ex">EXAMPLE DATA</div></div>
-<div class="seg" role="tablist"><button id="tabU" class="on" onclick="go('utility')">Utility view</button><button id="tabP" onclick="go('pilot')">Pilot view</button></div></header>
+<div class="auth on" id="auth">
+<div class="ascr on" id="aW"><div class="ex aex">EXAMPLE DATA</div>
+<div class="wlogo"><img src="logo.png" alt="GridView UAS Services LLC"></div>
+<div class="wtag">See it before it fails.</div><div class="wsub">Drone inspections for electric distribution · Temperance, MI</div>
+<button class="ab gold" id="goPilot" onclick="showA('aP')">🛩 Pilot sign in</button>
+<button class="ab line" id="goCust" onclick="showA('aC')">🏢 Customer sign in</button>
+<div class="asmall">Customers are utilities — e.g. DTE, Consumers Energy, Toledo Edison and electric co-ops.</div>
+<div class="demo"><div class="dl">Demo: sign in as…</div>
+<button class="db" id="demoPilot" onclick="demo('pilot')">🛩 Matt Brooks <small>Pilot</small></button>
+<button class="db" id="demoHW" onclick="demo('hw')">🏢 Hancock-Wood Electric Co-op <small>Customer</small></button>
+<button class="db" id="demoTE" onclick="demo('te')">🏢 Toledo Edison <small>Customer</small></button></div>
+<div class="fine">Demo only — no real accounts exist and nothing you type is stored or sent.</div></div>
+<form class="ascr" id="aP" onsubmit="event.preventDefault();signIn('pilot')" autocomplete="off">
+<button type="button" class="back" onclick="showA('aW')">← Back</button><div class="ahl"><img src="logo.png" alt=""><div><h2>Pilot sign in</h2><small>Upload inspection photos for any company</small></div></div>
+<div class="fld"><label for="pEm">Email</label><input id="pEm" type="email" placeholder="you@gridviewuas.com" autocomplete="off"></div>
+<div class="fld"><label for="pPw">Password</label><input id="pPw" type="password" placeholder="Password" autocomplete="new-password"></div>
+<div class="arow"><label class="tog"><input type="checkbox" id="pRem"><span></span>Remember me</label><a href="#" onclick="event.preventDefault();toast('Demo — no reset email is sent.')">Forgot password?</a></div>
+<button class="ab gold" type="submit" id="pSubmit">Sign in</button>
+<button type="button" class="db" onclick="demo('pilot')">Demo: sign in as Matt Brooks (Pilot)</button>
+<div class="fine">Demo only — any email and password works. Nothing is stored.</div></form>
+<form class="ascr" id="aC" onsubmit="event.preventDefault();signIn('customer',/toledo|firstenergy|\bte\b/i.test($('cEm').value)?TE:HW)" autocomplete="off">
+<button type="button" class="back" onclick="showA('aW')">← Back</button><div class="ahl"><img src="logo.png" alt=""><div><h2>Customer sign in</h2><small>For utilities and co-ops</small></div></div>
+<div class="fld"><label for="cEm">Email</label><input id="cEm" type="email" placeholder="you@yourutility.com" autocomplete="off"></div>
+<div class="fld"><label for="cPw">Password</label><input id="cPw" type="password" placeholder="Password" autocomplete="new-password"></div>
+<div class="arow"><span></span><a href="#" onclick="event.preventDefault();toast('Demo — no reset email is sent.')">Forgot password?</a></div>
+<div class="card note" style="margin-top:12px"><span class="i">🔒</span><div style="color:var(--mut)">Access is <b style="color:var(--txt)">invite-only</b>. GridView sets up your company account — contact your GridView rep for an invite.</div></div>
+<button class="ab gold" type="submit" id="cSubmit">Sign in</button>
+<div class="dl" style="margin-top:12px">Demo: sign in as…</div>
+<button type="button" class="db" onclick="demo('hw')">🏢 Hancock-Wood Electric Co-op</button><button type="button" class="db" onclick="demo('te')">🏢 Toledo Edison</button>
+<div class="fine">Demo only — any email and password works. Nothing is stored.</div></form>
+<div class="toast" id="toast"></div></div>
+<header class="hdr"><div class="hrow"><div class="logo"><img src="logo.png" alt="GridView UAS Services LLC"></div><div class="tag">SEE IT BEFORE<br>IT FAILS.</div><div class="ex">EXAMPLE DATA</div><button class="av" id="avBtn" onclick="toggleMenu()" aria-label="Account menu">MB</button></div>
+<div class="orgrow"><span class="orgb" id="orgB">🏢 Hancock-Wood Electric Co-op</span><span class="role" id="roleL">Customer</span></div>
+<div class="menu" id="menu"><div class="mh"><b id="mName">—</b><small id="mSub">—</small></div>
+<button class="mi pilotOnly" onclick="go('pilot');toggleMenu(false)">⬆ New upload</button><button class="mi pilotOnly" onclick="go('utility');toggleMenu(false)">🗺 Map · all companies</button>
+<button class="mi so" id="signOut" onclick="signOut()">↩ Sign out</button></div></header>
 
 <section class="view on" id="vU">
 <div id="map"></div>
-<div class="uov"><div class="srch"><span style="color:var(--gold)">🔍</span><input id="q" type="search" placeholder="Search circuit, territory, pole #" autocomplete="off" aria-label="Search circuit, territory, pole number"><button class="clr" id="qClr" aria-label="Clear search">✕</button></div>
+<div class="uov"><div class="srch"><span style="color:var(--gold)">🔍</span><input id="q" type="search" placeholder="Search circuit or territory" autocomplete="off" aria-label="Search circuit or territory"><button class="clr" id="qClr" aria-label="Clear search">✕</button></div>
 <div class="chips"><select class="fsel" id="fTerr" aria-label="Territory"></select><select class="fsel" id="fCir" aria-label="Circuit"></select><div class="chip on">📅 Oct 5–9, 2026</div><div class="chip or"><span class="dot" style="background:#ff3b3b"></span>High</div><div class="chip or"><span class="dot" style="background:var(--orange)"></span>Med</div></div>
 <div class="res" id="res"></div></div>
 <div class="hint" id="hint">Tap a pin to see the photo</div>
@@ -139,7 +197,7 @@ function icon(c,cls=''){return L.divIcon({className:'',html:`<div class="pin ${c
 const tiles=()=>L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'Esri World Imagery',maxZoom:19});
 // utility map
 const map=L.map('map',{zoomControl:false}).setView([41.7735,-83.5665],14);tiles().addTo(map);
-L.polyline(route,{color:'#9fd0f0',weight:3}).addTo(map);
+const hwLine=L.polyline(route,{color:'#9fd0f0',weight:3}).addTo(map);
 const sev='nlmmnnhlnmnlnhm';let selM=null,uPins=[];
 const HW='Hancock-Wood Electric Co-op';
 // example tags: pins 0-5 Bedford Twp/Cir. 12, 6-10 Erie Twp/Cir. 14, 11-14 Monroe North/Cir. 7
@@ -148,21 +206,29 @@ function addUPin(ll,s,i,isNew,t){const m=L.marker(ll,{icon:icon(col[s],isNew?'ne
 m.d=Object.assign({co:HW,terr:tagOf(i)[0],cir:tagOf(i)[1],pole:'HW-12-0'+(331+i)},t||{});
 m.on('click',()=>openSheet(m,ll,s,i));uPins.push(m);return m}
 for(let i=0;i<15;i++){const f=1.4+i*0.27;addUPin(along(f),sev[i],i)}
-const clusters=[[[41.7880,-83.5835],42],[[41.7590,-83.5505],37]].map(([ll,n])=>L.marker(ll,{icon:L.divIcon({className:'',html:`<div class="cl">${n}</div>`,iconSize:[42,42],iconAnchor:[21,21]})}).addTo(map).on('click',()=>map.flyTo(ll,16)));
+const TE='Toledo Edison (FirstEnergy)';
+// example Toledo Edison pins near Lambertville / Temperance
+const teRoute=[[41.7712,-83.6315],[41.7668,-83.6190],[41.7630,-83.6060],[41.7598,-83.5935],[41.7572,-83.5830]];
+const teLine=L.polyline(teRoute,{color:'#9fd0f0',weight:3}).addTo(map);
+'nmlnhnmnn'.split('').forEach((s,j)=>{const f=j/8*3,k=Math.min(2,Math.floor(f)),t=f-k,ll=[teRoute[k][0]+(teRoute[k+1][0]-teRoute[k][0])*t,teRoute[k][1]+(teRoute[k+1][1]-teRoute[k][1])*t];
+addUPin(ll,s,30+j,false,{co:TE,terr:j<5?'Lambertville':'Bedford Twp',cir:j<5?'Cir. 31':'Cir. 33',pole:'TE-31-'+(140+j)})});
+let role=null,org=null;
+function lines(){[[hwLine,HW],[teLine,TE]].forEach(([l,c])=>{const s=!org||org==c;if(s&&!map.hasLayer(l))l.addTo(map);if(!s)map.removeLayer(l)})}
+const vis=d=>!org||d.co==org;const showCl=()=>!org||org==HW;
+let clusters=[];clusters=[[[41.7880,-83.5835],42],[[41.7590,-83.5505],37]].map(([ll,n])=>L.marker(ll,{icon:L.divIcon({className:'',html:`<div class="cl">${n}</div>`,iconSize:[42,42],iconAnchor:[21,21]})}).addTo(map).on('click',()=>map.flyTo(ll,16)));
 const norm=s=>(s||'').toLowerCase().replace(/[^a-z0-9]/g,'').replace(/^circuit/,'cir');
-function fillSel(){const mk=(id,key,lab)=>{const el=$(id),cur=el.value,vals=[...new Set(uPins.map(m=>m.d[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+function fillSel(){const mk=(id,key,lab)=>{const el=$(id),cur=el.value,vals=[...new Set(uPins.filter(m=>vis(m.d)).map(m=>m.d[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
 el.innerHTML=`<option value="">${lab}: All</option>`+vals.map(v=>`<option value="${v}">${lab}: ${v}</option>`).join('');el.value=vals.includes(cur)?cur:''};
 mk('fTerr','terr','Territory');mk('fCir','cir','Circuit')}
 function applyFilter(){const q=norm($('q').value),t=$('fTerr').value,c=$('fCir').value;let n=0;
-uPins.forEach(m=>{const d=m.d,hay=norm(d.co)+'|'+norm(d.terr)+'|'+norm(d.cir)+'|'+norm(d.pole)+'|'+norm('pole'+d.pole);
-const ok=(!t||d.terr==t)&&(!c||d.cir==c)&&(!q||hay.includes(q)||norm(d.cir).replace('cir','')==q);
+uPins.forEach(m=>{const d=m.d,hay=norm(d.terr)+'|'+norm(d.cir);
+const ok=vis(d)&&(!t||d.terr==t)&&(!c||d.cir==c)&&(!q||hay.includes(q)||norm(d.cir).replace('cir','')==q);
 if(ok){n++;if(!map.hasLayer(m))m.addTo(map)}else if(map.hasLayer(m)){if(m==selM)closeSheet();map.removeLayer(m)}});
-const any=q||t||c;clusters.forEach(k=>any?map.removeLayer(k):(!map.hasLayer(k)&&k.addTo(map)));
+const any=q||t||c;clusters.forEach(k=>(any||!showCl())?map.removeLayer(k):(!map.hasLayer(k)&&k.addTo(map)));
 $('fTerr').classList.toggle('act',!!t);$('fCir').classList.toggle('act',!!c);$('qClr').style.display=$('q').value?'block':'none';
-$('res').innerHTML=any?`Showing <b>${n}</b> of ${uPins.length} pins`+(n?'':' — no matches'):`<b>${uPins.length}</b> pins + 2 clusters · all territories & circuits`;
+const tot=uPins.filter(m=>vis(m.d)).length;$('res').innerHTML=any?`Showing <b>${n}</b> of ${tot} pins`+(n?'':' — no matches'):`<b>${tot}</b> pins`+(showCl()?' + 2 clusters':'')+' · all territories & circuits';
 if(any&&n){map.fitBounds(L.latLngBounds(uPins.filter(m=>map.hasLayer(m)).map(m=>m.getLatLng())).pad(.3),{paddingTopLeft:[0,170],paddingBottomRight:[0,90],maxZoom:16})}}
 $('q').addEventListener('input',applyFilter);$('fTerr').onchange=applyFilter;$('fCir').onchange=applyFilter;$('qClr').onclick=()=>{$('q').value='';applyFilter()};
-fillSel();applyFilter();
 function openSheet(m,ll,s,i){if(selM)selM.setIcon(icon(selM._c));m._c=col[s];m.setIcon(icon(col[s],'sel'));selM=m;
 const [t,lv]=issues[s];$('dIssue').innerHTML=`<span class="dot" style="background:${col[s]};margin:0"></span>${t}${s=='n'?'':' — '+lv}`;
 $('dIssue').style.cssText=`color:${s=='n'?'#9fd0f0':col[s]};border:1px solid ${col[s]};background:${col[s]}22`;
@@ -178,7 +244,7 @@ if(i<14){d.style.background=`linear-gradient(${i*37}deg,hsl(${200+i*7%40},25%,${
 document.querySelectorAll('.tg').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tg').forEach(x=>x.classList.remove('on'));b.classList.add('on')});
 let pmap=null,timer=null,state='upload';
 function btns(){$('upBtn').style.display=state=='upload'?'block':'none';$('pauseBtn').style.display=state=='uploading'?'block':'none';$('viewBtn').style.display=state=='done'?'block':'none'}
-function go(v){$('tabU').classList.toggle('on',v=='utility');$('tabP').classList.toggle('on',v=='pilot');$('vU').classList.toggle('on',v=='utility');$('vP').classList.toggle('on',v=='pilot');
+function go(v){if(v=='pilot'&&role!='pilot')v='utility';$('vU').classList.toggle('on',v=='utility');$('vP').classList.toggle('on',v=='pilot');
 if(v=='utility')setTimeout(()=>map.invalidateSize(),0);else{btns();if(pmap)setTimeout(()=>pmap.invalidateSize(),0)}}
 let pick=null;
 $('pCo').onchange=()=>$('fCoWrap').classList.remove('err');
@@ -194,7 +260,22 @@ const c=col[sev[i%sev.length]];const m=L.marker(along(1+i*0.4),{icon:L.divIcon({
 $('pinsN').textContent=Math.round(212*p/100)+' pins placed';
 if(p>=100){clearInterval(timer);state='done';$('upTitle').textContent='Upload complete · '+[pick.co,pick.terr,pick.cir].filter(Boolean).join(' · ');$('bgNote').style.display='none';$('doneNote').style.display='flex';btns()}},80)}
 let added=false;
-function viewOnMap(){if(!added){added=true;$('sPh').textContent='626';for(let i=0;i<3;i++)addUPin(along(5.6+i*0.3),'nmn'[i],20+i,true,{co:pick.co,terr:pick.terr,cir:pick.cir,pole:'NEW-0'+(1+i)})}
-go('utility');fillSel();$('q').value='';$('fTerr').value='';$('fCir').value='';applyFilter();map.flyTo(along(5.9),15)}
+const STATS={all:[626,72,8.2,31],[HW]:[412,58,6.4,26],[TE]:[96,14,1.8,5]};
+function setStats(){const s=STATS[org||'all'];const b=document.querySelectorAll('.stats b');b[0].textContent=s[0]+(added&&(!org||org==pick.co)?214:0);b[1].textContent=s[1];b[2].textContent=s[2]+' mi';b[3].textContent=s[3]}
+function showA(id){['aW','aP','aC'].forEach(x=>$(x).classList.toggle('on',x==id));$('auth').scrollTop=0}
+function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
+function demo(k){if(k=='pilot'){$('pEm').value='matt@gridviewuas.example';$('pPw').value='demo';signIn('pilot')}else signIn('customer',k=='te'?TE:HW)}
+function signIn(r,o){role=r;org=r=='customer'?o:null;
+const nm=r=='pilot'?'Matt Brooks':(o==TE?'Toledo Edison':'Hancock-Wood Electric Co-op');
+$('orgB').textContent=r=='pilot'?'🛩 Matt Brooks · all companies':'🏢 '+o;$('roleL').textContent=r=='pilot'?'Pilot':'Customer';
+$('avBtn').textContent=r=='pilot'?'MB':(o==TE?'TE':'HW');$('mName').textContent=r=='pilot'?'Matt Brooks':o;$('mSub').textContent=r=='pilot'?'Pilot · can upload for any company':'Customer · sees only '+nm+' data';
+document.querySelectorAll('.pilotOnly').forEach(e=>e.style.display=r=='pilot'?'block':'none');
+$('pEm').value=$('pPw').value=$('cEm').value=$('cPw').value='';
+if(state!='uploading'){state='upload';$('pUploading').classList.remove('on');$('pUpload').classList.add('on')}$('auth').classList.remove('on');closeSheet();$('q').value='';fillSel();$('fTerr').value='';$('fCir').value='';applyFilter();setStats();lines();
+go(r=='pilot'?'pilot':'utility');setTimeout(()=>{map.invalidateSize();const vs=uPins.filter(m=>vis(m.d));if(org)map.fitBounds(L.latLngBounds(vs.map(m=>m.getLatLng())).pad(.1),{paddingTopLeft:[0,170],paddingBottomRight:[0,90],maxZoom:16});else map.setView([41.7700,-83.5900],13)},50)}
+function toggleMenu(f){$('menu').classList.toggle('on',f)}
+function signOut(){toggleMenu(false);closeSheet();role=org=null;$('auth').classList.add('on');showA('aW')}
+function viewOnMap(){if(!added){added=true;const onTE=pick.co==TE;for(let i=0;i<3;i++)addUPin(onTE?[41.7592-0.0008*i,-83.5910+0.0032*i]:along(5.6+i*0.3),'nmn'[i],20+i,true,{co:pick.co,terr:pick.terr,cir:pick.cir,pole:'NEW-0'+(1+i)})}
+go('utility');setStats();fillSel();$('q').value='';$('fTerr').value='';$('fCir').value='';applyFilter();map.flyTo(pick.co==TE?[41.7584,-83.5878]:along(5.9),15)}
 btns();
 </script></body></html>
