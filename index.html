@@ -60,6 +60,25 @@ h3{font-size:18px;margin:12px 0 2px}.sub{color:var(--mut);font-size:12.5px}
 .arow{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px}.arow a{color:var(--gold);font-weight:600;text-decoration:none}
 .tog{display:flex;align-items:center;gap:8px;color:var(--txt);cursor:pointer}.tog input{display:none}.tog span{width:38px;height:22px;border-radius:11px;background:#2a4058;position:relative;transition:.2s}.tog span:after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}.tog input:checked+span{background:var(--gold)}.tog input:checked+span:after{left:19px}
 .toast{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);background:#0a3150;border:1px solid var(--gold);padding:8px 14px;border-radius:999px;font-size:12.5px;display:none;white-space:nowrap}
+/* signup / approvals */
+.lnk{color:var(--gold);font-weight:700}
+.aerr{display:none;margin-top:12px;padding:10px 12px;border-radius:10px;background:rgba(255,59,59,.12);border:1px solid rgba(255,90,90,.6);color:#ff9a9a;font-size:13px;font-weight:600}
+.rolepick{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rolepick label{margin:0;text-transform:none;letter-spacing:0}.rolepick input{display:none}.rolepick span{display:block;text-transform:none;letter-spacing:0;text-align:center;padding:11px;border-radius:12px;border:1px solid rgba(79,159,209,.35);background:var(--navy2);font-size:14px;font-weight:700;color:var(--txt);cursor:pointer}.rolepick input:checked+span{background:var(--gold);color:#021f33;border-color:var(--gold)}
+.pendI{font-size:54px;text-align:center;margin-top:60px}.pendT{text-align:center;color:var(--mut);font-size:14.5px;margin-top:8px;line-height:1.45}
+.ovl{position:absolute;inset:0;z-index:3200;background:var(--navy);overflow-y:auto;display:none}.ovl.on{display:block}
+.mbar{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top) + 14px) 14px 12px;background:#011726;border-bottom:1px solid rgba(79,159,209,.2);font-size:12px;color:var(--mut);z-index:2}.mbar .ex{margin-left:auto;flex:none}.mbar .back{flex:none;white-space:nowrap}
+.mwrap{padding:14px}.email{background:#fff;color:#1d2733;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.ehd{padding:14px 16px;border-bottom:1px solid #e3e8ee;font-size:12.5px;line-height:1.6;color:#55606e}.ehd b{color:#1d2733}.esubj{font-size:17px;font-weight:800;color:#1d2733;margin-bottom:6px}
+.ebrand{background:#053d63;padding:14px 16px;display:flex;align-items:center;gap:10px}.ebrand img{height:44px;background:#fff;border-radius:8px;padding:2px 5px}.ebrand span{color:#ebb54a;font-weight:800;font-size:12px;letter-spacing:.4px}
+.ebody{padding:16px;font-size:14px;line-height:1.5}.etab{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}.etab td{padding:7px 0;border-bottom:1px solid #eef1f4}.etab td:first-child{color:#6b7684;width:38%}
+.ebody select{width:100%;padding:10px;border-radius:9px;border:1.5px solid #053d63;font:inherit;font-size:14px;margin-top:4px;color:#1d2733;background:#fff}
+.ebtn{display:flex;gap:10px;margin-top:14px}.ebtn button{flex:1;padding:13px;border-radius:10px;font-weight:800;font-size:15px}.eap{background:#ebb54a;color:#021f33}.edn{border:1.5px solid #053d63;color:#053d63}
+.efoot{padding:12px 16px;background:#f4f6f9;color:#7a8592;font-size:11px}.estat{margin-top:12px;padding:10px;border-radius:9px;font-weight:700;text-align:center}
+.rq{background:var(--navy2);border:1px solid rgba(79,159,209,.3);border-radius:14px;padding:12px;margin-bottom:12px}.rq h4{font-size:15.5px}.rq .m{color:var(--mut);font-size:12.5px;margin-top:2px;line-height:1.45}
+.pill{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:6px;text-transform:uppercase;float:right}.pill.pending{background:rgba(235,181,74,.18);color:var(--gold)}.pill.approved{background:rgba(91,214,124,.18);color:#5bd67c}.pill.denied{background:rgba(255,90,90,.18);color:#ff8a8a}
+.rq select{width:100%;margin-top:8px;font:inherit;font-size:13.5px;padding:9px;border-radius:10px;background:#062640;color:var(--txt);border:1px solid rgba(235,181,74,.5)}
+.rq .ebtn button{padding:10px;font-size:14px}.rq .edn{border-color:rgba(142,160,196,.5);color:var(--txt)}.rq .vl{display:block;margin-top:8px;color:var(--gold);font-size:12.5px;font-weight:600}
+.cntb{float:right;background:var(--gold);color:#021f33;border-radius:999px;font-size:11px;padding:1px 7px;font-weight:800}
 /* header account */
 .av{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);font-weight:800;font-size:13px;flex:none}
 .orgrow{display:flex;align-items:center;gap:8px;margin-top:9px}.orgb{font-size:13px;font-weight:700;background:var(--navy2);border:1px solid rgba(235,181,74,.5);padding:6px 10px;border-radius:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px}
@@ -111,35 +130,59 @@ h3{font-size:18px;margin:12px 0 2px}.sub{color:var(--mut);font-size:12.5px}
 <div class="wtag">See it before it fails.</div><div class="wsub">Drone inspections for electric distribution · Temperance, MI</div>
 <button class="ab gold" id="goPilot" onclick="showA('aP')">🛩 Pilot sign in</button>
 <button class="ab line" id="goCust" onclick="showA('aC')">🏢 Customer sign in</button>
+<div class="asmall" style="margin-top:14px;font-size:13.5px;color:var(--txt)">New to GridView? <a href="#" id="goSignup" class="lnk" onclick="event.preventDefault();openSignup()">Request access / Sign up</a></div>
 <div class="asmall">Customers are utilities — e.g. DTE, Consumers Energy, Toledo Edison and electric co-ops.</div>
 <div class="demo"><div class="dl">Demo: sign in as…</div>
 <button class="db" id="demoPilot" onclick="demo('pilot')">🛩 Matt Brooks <small>Pilot</small></button>
 <button class="db" id="demoHW" onclick="demo('hw')">🏢 Hancock-Wood Electric Co-op <small>Customer</small></button>
 <button class="db" id="demoTE" onclick="demo('te')">🏢 Toledo Edison <small>Customer</small></button></div>
 <div class="fine">Demo only — no real accounts exist and nothing you type is stored or sent.</div></div>
-<form class="ascr" id="aP" onsubmit="event.preventDefault();signIn('pilot')" autocomplete="off">
+<form class="ascr" id="aP" onsubmit="event.preventDefault();login('pilot')" autocomplete="off">
 <button type="button" class="back" onclick="showA('aW')">← Back</button><div class="ahl"><img src="logo.png" alt=""><div><h2>Pilot sign in</h2><small>Upload inspection photos for any company</small></div></div>
 <div class="fld"><label for="pEm">Email</label><input id="pEm" type="email" placeholder="you@gridviewuas.com" autocomplete="off"></div>
 <div class="fld"><label for="pPw">Password</label><input id="pPw" type="password" placeholder="Password" autocomplete="new-password"></div>
 <div class="arow"><label class="tog"><input type="checkbox" id="pRem"><span></span>Remember me</label><a href="#" onclick="event.preventDefault();toast('Demo — no reset email is sent.')">Forgot password?</a></div>
-<button class="ab gold" type="submit" id="pSubmit">Sign in</button>
+<div class="aerr" id="pErr"></div><button class="ab gold" type="submit" id="pSubmit">Sign in</button>
 <button type="button" class="db" onclick="demo('pilot')">Demo: sign in as Matt Brooks (Pilot)</button>
 <div class="fine">Demo only — any email and password works. Nothing is stored.</div></form>
-<form class="ascr" id="aC" onsubmit="event.preventDefault();signIn('customer',/toledo|firstenergy|\bte\b/i.test($('cEm').value)?TE:HW)" autocomplete="off">
+<form class="ascr" id="aC" onsubmit="event.preventDefault();login('customer')" autocomplete="off">
 <button type="button" class="back" onclick="showA('aW')">← Back</button><div class="ahl"><img src="logo.png" alt=""><div><h2>Customer sign in</h2><small>For utilities and co-ops</small></div></div>
 <div class="fld"><label for="cEm">Email</label><input id="cEm" type="email" placeholder="you@yourutility.com" autocomplete="off"></div>
 <div class="fld"><label for="cPw">Password</label><input id="cPw" type="password" placeholder="Password" autocomplete="new-password"></div>
 <div class="arow"><span></span><a href="#" onclick="event.preventDefault();toast('Demo — no reset email is sent.')">Forgot password?</a></div>
 <div class="card note" style="margin-top:12px"><span class="i">🔒</span><div style="color:var(--mut)">Access is <b style="color:var(--txt)">invite-only</b>. GridView sets up your company account — contact your GridView rep for an invite.</div></div>
-<button class="ab gold" type="submit" id="cSubmit">Sign in</button>
+<div class="aerr" id="cErr"></div><button class="ab gold" type="submit" id="cSubmit">Sign in</button>
 <div class="dl" style="margin-top:12px">Demo: sign in as…</div>
 <button type="button" class="db" onclick="demo('hw')">🏢 Hancock-Wood Electric Co-op</button><button type="button" class="db" onclick="demo('te')">🏢 Toledo Edison</button>
 <div class="fine">Demo only — any email and password works. Nothing is stored.</div></form>
+<form class="ascr" id="aS" onsubmit="event.preventDefault();submitSignup()" autocomplete="off">
+<button type="button" class="back" onclick="showA('aW')">← Back</button><div class="ahl"><img src="logo.png" alt=""><div><h2>Request access</h2><small>GridView reviews every new account</small></div></div>
+<div class="fld"><label>I am a <i>*</i></label><div class="rolepick"><label><input type="radio" name="sRole" value="pilot" checked onchange="sRoleChg()"><span>🛩 Pilot</span></label><label><input type="radio" name="sRole" value="customer" onchange="sRoleChg()"><span>🏢 Customer</span></label></div></div>
+<div class="fld"><label for="sName">Full name <i>*</i></label><input id="sName" placeholder="First and last name" autocomplete="off"></div>
+<div class="fld" id="sCoWrap" style="display:none"><label for="sCo">Company <i>*</i></label><select id="sCo"><option value="" disabled selected>Select your utility</option><option>DTE Energy</option><option>Consumers Energy</option><option>Toledo Edison (FirstEnergy)</option><option>Hancock-Wood Electric Co-op</option><option>Other</option></select>
+<input id="sCoOther" placeholder="Company name" style="display:none;margin-top:8px" autocomplete="off"></div>
+<div class="fld"><label for="sEm">Work email <i>*</i></label><input id="sEm" type="email" placeholder="you@company.com" autocomplete="off"></div>
+<div class="fld"><label for="sPh">Phone <small>(optional)</small></label><input id="sPh" type="tel" placeholder="(419) 555-0100" autocomplete="off"></div>
+<div class="fld"><label for="sPw">Password <i>*</i></label><input id="sPw" type="password" placeholder="Create a password" autocomplete="new-password"></div>
+<div class="aerr" id="sErr"></div>
+<button class="ab gold" type="submit" id="sSubmit">Send request</button>
+<div class="fine">Demo only — nothing is stored or emailed. In the real app this request goes to GridView (matt@gridviewuasservices.com) for approval.</div></form>
+<div class="ascr" id="aPend"><div class="ex aex">EXAMPLE DATA</div>
+<div class="pendI">✉️</div><h2 style="text-align:center;font-size:23px">Request sent</h2>
+<p class="pendT">GridView will review your request and email you once you're approved.</p>
+<div class="card" id="pendSum" style="margin-top:18px;font-size:13.5px;line-height:1.6"></div>
+<div class="card note" style="margin-top:12px"><span class="i">⏳</span><div style="color:var(--mut)">Until approved, signing in shows <b style="color:var(--txt)">"Your account is pending approval."</b></div></div>
+<button class="ab line" id="viewEmail" onclick="openEmail(lastReq)">👁 View the email Matt receives</button>
+<button class="ab gold" onclick="showA('aW')">Back to sign in</button>
+<div class="fine">Demo only — no real email is sent.</div></div>
 <div class="toast" id="toast"></div></div>
+<div class="ovl" id="mail" style="z-index:3300"><div class="mbar"><button class="back" onclick="closeEmail()">← Back</button><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">matt@gridviewuasservices.com</span><span class="ex">DEMO EMAIL</span></div><div class="mwrap" id="mailBody"></div></div>
+<div class="ovl" id="reqs"><div class="mbar"><button class="back" onclick="$('reqs').classList.remove('on')">← Back</button><span>Owner · Access requests</span><span class="ex">EXAMPLE DATA</span></div><div style="padding:12px 14px 30px" id="reqList"></div></div>
 <header class="hdr"><div class="hrow"><div class="logo"><img src="logo.png" alt="GridView UAS Services LLC"></div><div class="tag">SEE IT BEFORE<br>IT FAILS.</div><div class="ex">EXAMPLE DATA</div><button class="av" id="avBtn" onclick="toggleMenu()" aria-label="Account menu">MB</button></div>
 <div class="orgrow"><span class="orgb" id="orgB">🏢 Hancock-Wood Electric Co-op</span><span class="role" id="roleL">Customer</span></div>
 <div class="menu" id="menu"><div class="mh"><b id="mName">—</b><small id="mSub">—</small></div>
 <button class="mi pilotOnly" onclick="go('pilot');toggleMenu(false)">⬆ New upload</button><button class="mi pilotOnly" onclick="go('utility');toggleMenu(false)">🗺 Map · all companies</button>
+<button class="mi ownerOnly" id="reqMenu" onclick="openReqs()">🛡 Access requests <span class="cntb" id="reqCnt">0</span></button>
 <button class="mi so" id="signOut" onclick="signOut()">↩ Sign out</button></div></header>
 
 <section class="view on" id="vU">
@@ -261,20 +304,67 @@ $('pinsN').textContent=Math.round(212*p/100)+' pins placed';
 if(p>=100){clearInterval(timer);state='done';$('upTitle').textContent='Upload complete · '+[pick.co,pick.terr,pick.cir].filter(Boolean).join(' · ');$('bgNote').style.display='none';$('doneNote').style.display='flex';btns()}},80)}
 let added=false;
 const STATS={all:[626,72,8.2,31],[HW]:[412,58,6.4,26],[TE]:[96,14,1.8,5]};
-function setStats(){const s=STATS[org||'all'];const b=document.querySelectorAll('.stats b');b[0].textContent=s[0]+(added&&(!org||org==pick.co)?214:0);b[1].textContent=s[1];b[2].textContent=s[2]+' mi';b[3].textContent=s[3]}
-function showA(id){['aW','aP','aC'].forEach(x=>$(x).classList.toggle('on',x==id));$('auth').scrollTop=0}
+function setStats(){const s=STATS[org||'all']||[0,0,0,0];const b=document.querySelectorAll('.stats b');b[0].textContent=s[0]+(added&&(!org||org==pick.co)?214:0);b[1].textContent=s[1];b[2].textContent=s[2]+' mi';b[3].textContent=s[3]}
+function showA(id){['aW','aP','aC','aS','aPend'].forEach(x=>$(x).classList.toggle('on',x==id));$('auth').scrollTop=0}
 function toast(t){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2200)}
 function demo(k){if(k=='pilot'){$('pEm').value='matt@gridviewuas.example';$('pPw').value='demo';signIn('pilot')}else signIn('customer',k=='te'?TE:HW)}
-function signIn(r,o){role=r;org=r=='customer'?o:null;
-const nm=r=='pilot'?'Matt Brooks':(o==TE?'Toledo Edison':'Hancock-Wood Electric Co-op');
-$('orgB').textContent=r=='pilot'?'🛩 Matt Brooks · all companies':'🏢 '+o;$('roleL').textContent=r=='pilot'?'Pilot':'Customer';
-$('avBtn').textContent=r=='pilot'?'MB':(o==TE?'TE':'HW');$('mName').textContent=r=='pilot'?'Matt Brooks':o;$('mSub').textContent=r=='pilot'?'Pilot · can upload for any company':'Customer · sees only '+nm+' data';
-document.querySelectorAll('.pilotOnly').forEach(e=>e.style.display=r=='pilot'?'block':'none');
+function signIn(r,o,uname,owner){role=r;org=r=='customer'?o:null;if(owner===undefined)owner=r=='pilot'&&!uname;const pn=uname||'Matt Brooks';
+const nm=o;
+$('orgB').textContent=r=='pilot'?'🛩 '+pn+' · all companies':'🏢 '+o;$('roleL').textContent=r=='pilot'?(owner?'Owner · Pilot':'Pilot'):'Customer';
+const ini=s=>s.replace(/\(.*?\)/g,'').split(/\s+/).filter(w=>/^[A-Za-z]/.test(w)&&!/^(of|and)$/i.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('');$('avBtn').textContent=uname?ini(uname):r=='pilot'?'MB':o==TE?'TE':o==HW?'HW':ini(o);$('mName').textContent=uname?uname+(r=='customer'?' · '+o:''):(r=='pilot'?pn:o);$('mSub').textContent=r=='pilot'?'Pilot · can upload for any company':'Customer · sees only '+nm+' data';
+document.querySelectorAll('.pilotOnly').forEach(e=>e.style.display=r=='pilot'?'block':'none');$('reqMenu').style.display=owner?'block':'none';updCnt();['pErr','cErr'].forEach(x=>$(x).style.display='none');
 $('pEm').value=$('pPw').value=$('cEm').value=$('cPw').value='';
 if(state!='uploading'){state='upload';$('pUploading').classList.remove('on');$('pUpload').classList.add('on')}$('auth').classList.remove('on');closeSheet();$('q').value='';fillSel();$('fTerr').value='';$('fCir').value='';applyFilter();setStats();lines();
-go(r=='pilot'?'pilot':'utility');setTimeout(()=>{map.invalidateSize();const vs=uPins.filter(m=>vis(m.d));if(org)map.fitBounds(L.latLngBounds(vs.map(m=>m.getLatLng())).pad(.1),{paddingTopLeft:[0,170],paddingBottomRight:[0,90],maxZoom:16});else map.setView([41.7700,-83.5900],13)},50)}
+go(r=='pilot'?'pilot':'utility');setTimeout(()=>{map.invalidateSize();const vs=uPins.filter(m=>vis(m.d));if(org&&vs.length)map.fitBounds(L.latLngBounds(vs.map(m=>m.getLatLng())).pad(.1),{paddingTopLeft:[0,170],paddingBottomRight:[0,90],maxZoom:16});else map.setView([41.7700,-83.5900],13);if(org&&!vs.length)toast('No inspections for '+org+' yet (example)')},50)}
+// ---- sign-up & approvals (in-memory only) ----
+const COS=['DTE Energy','Consumers Energy',TE,HW];let user=null,lastReq=null,rid=1;
+const reqs=[{id:rid++,role:'customer',name:'Dana Whitfield',company:'Consumers Energy',email:'dana.whitfield@consumers.example',phone:'(517) 555-0142',status:'pending',assign:'Consumers Energy',when:'Oct 12, 2026 · 6:18 PM ET'}];
+$('aS').addEventListener('input',()=>$('sErr').style.display='none');
+function openSignup(){$('aS').reset();sRoleChg();$('sErr').style.display='none';showA('aS')}
+const sRole=()=>document.querySelector('input[name=sRole]:checked').value;
+function sRoleChg(){const c=sRole()=='customer';$('sCoWrap').style.display=c?'block':'none'}
+$('sCo').addEventListener('change',()=>$('sCoOther').style.display=$('sCo').value=='Other'?'block':'none');
+function submitSignup(){const role=sRole(),name=$('sName').value.trim(),em=$('sEm').value.trim(),pw=$('sPw').value;let co='';
+if(role=='customer'){co=$('sCo').value=='Other'?($('sCoOther').value.trim()||''):$('sCo').value}
+const miss=[!name&&'full name',role=='customer'&&!co&&'company',!/^\S+@\S+\.\S+$/.test(em)&&'a valid work email',!pw&&'password'].filter(Boolean);
+if(miss.length){$('sErr').textContent='Please add '+miss.join(', ')+'.';$('sErr').style.display='block';return}
+if(reqs.some(r=>r.email.toLowerCase()==em.toLowerCase())){$('sErr').textContent='A request for this email already exists.';$('sErr').style.display='block';return}
+const r={id:rid++,role,name,company:co,email:em,phone:$('sPh').value.trim(),status:'pending',assign:COS.includes(co)?co:'',when:'Oct 12, 2026 · just now'};
+reqs.unshift(r);lastReq=r;$('sPw').value='';
+$('pendSum').innerHTML=`<b>${esc(name)}</b> · ${role=='pilot'?'Pilot':'Customer'}${co?' · '+esc(co):''}<br><span style="color:var(--mut)">${esc(em)}</span>`;
+showA('aPend');updCnt()}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const coOpts=sel=>`<option value="" ${sel?'':'selected'} disabled>Assign to company…</option>`+COS.map(c=>`<option ${c==sel?'selected':''}>${c}</option>`).join('');
+function decide(id,ok,selId){const r=reqs.find(x=>x.id==id);if(r.role=='customer'&&ok){const v=$(selId).value;if(!v){toast('Choose a company to assign first');return false}r.assign=v}
+r.status=ok?'approved':'denied';updCnt();toast(ok?`Approved — ${r.name} can now sign in`:`Denied — ${r.name}`);return true}
+function openEmail(r){if(!r)return;const st=r.status;
+$('mailBody').innerHTML=`<div class="email"><div class="ehd"><div class="esubj">New ${r.role=='pilot'?'pilot':'customer'} access request: ${esc(r.name)}</div>
+<b>From:</b> GridView &lt;no-reply@gridviewuasservices.com&gt;<br><b>To:</b> matt@gridviewuasservices.com<br><b>Date:</b> ${r.when}</div>
+<div class="ebrand"><img src="logo.png" alt=""><span>SEE IT BEFORE IT FAILS.</span></div>
+<div class="ebody">Hi Matt,<br>Someone has requested access to GridView and needs your approval.
+<table class="etab"><tr><td>Role</td><td><b>${r.role=='pilot'?'Pilot':'Customer'}</b></td></tr><tr><td>Name</td><td>${esc(r.name)}</td></tr>
+${r.role=='customer'?`<tr><td>Company</td><td>${esc(r.company)}</td></tr>`:''}<tr><td>Work email</td><td>${esc(r.email)}</td></tr><tr><td>Phone</td><td>${esc(r.phone||'—')}</td></tr></table>
+${st=='pending'?`${r.role=='customer'?`<label style="font-size:12px;font-weight:700;color:#053d63">ASSIGN TO COMPANY</label><select id="eAssign">${coOpts(r.assign)}</select>`:''}
+<div class="ebtn"><button class="eap" id="eApprove" onclick="decide(${r.id},true,'eAssign')&&openEmail(reqs.find(x=>x.id==${r.id}))">Approve</button><button class="edn" id="eDeny" onclick="decide(${r.id},false)&&openEmail(reqs.find(x=>x.id==${r.id}))">Deny</button></div>`
+:`<div class="estat" style="background:${st=='approved'?'#e5f7ea;color:#1e7a3a':'#fde8e8;color:#a12a2a'}">${st=='approved'?'✓ Approved'+(r.role=='customer'?' · '+esc(r.assign):''):'✕ Denied'}</div>`}</div>
+<div class="efoot">Example email — the demo doesn't send real email. Customers only see data for the company you assign.</div></div>`;
+$('mail').classList.add('on');$('mail').scrollTop=0}
+function closeEmail(){$('mail').classList.remove('on');if($('reqs').classList.contains('on'))renderReqs()}
+function updCnt(){$('reqCnt').textContent=reqs.filter(r=>r.status=='pending').length}
+function renderReqs(){$('reqList').innerHTML=`<div class="lbl" style="margin-top:2px">${reqs.filter(r=>r.status=='pending').length} pending · ${reqs.length} total</div>`+reqs.map(r=>`<div class="rq" id="rq${r.id}"><span class="pill ${r.status}">${r.status}</span><h4>${esc(r.name)}</h4>
+<div class="m">${r.role=='pilot'?'🛩 Pilot':'🏢 Customer · '+esc(r.company)}<br>${esc(r.email)}${r.phone?' · '+esc(r.phone):''}<br>${r.when}${r.status=='approved'&&r.role=='customer'?'<br>Assigned to <b style="color:var(--txt)">'+esc(r.assign)+'</b>':''}</div>
+${r.status=='pending'?`${r.role=='customer'?`<select id="as${r.id}" aria-label="Assign to company">${coOpts(r.assign)}</select>`:''}<div class="ebtn"><button class="eap" onclick="decide(${r.id},true,'as${r.id}')&&renderReqs()">Approve</button><button class="edn" onclick="decide(${r.id},false)&&renderReqs()">Deny</button></div>`:''}
+<a href="#" class="vl" onclick="event.preventDefault();openEmail(reqs.find(x=>x.id==${r.id}))">View request email →</a></div>`).join('')}
+function openReqs(){toggleMenu(false);renderReqs();$('reqs').classList.add('on')}
+function login(kind){const em=$(kind=='pilot'?'pEm':'cEm').value.trim().toLowerCase(),err=$(kind=='pilot'?'pErr':'cErr');err.style.display='none';
+const r=em&&reqs.find(x=>x.email.toLowerCase()==em);
+if(r){if(r.status!='approved'){err.textContent=r.status=='pending'?'Your account is pending approval.':'Your access request was not approved. Contact GridView.';err.style.display='block';return}
+if(r.role!=kind){err.textContent=`This account is approved as a ${r.role}. Use ${r.role=='pilot'?'Pilot':'Customer'} sign in.`;err.style.display='block';return}
+return signIn(r.role,r.assign,r.name,false)}
+if(kind=='pilot')signIn('pilot',null,null,true);else signIn('customer',/toledo|firstenergy|\bte\b/i.test(em)?TE:HW)}
+updCnt();
 function toggleMenu(f){$('menu').classList.toggle('on',f)}
-function signOut(){toggleMenu(false);closeSheet();role=org=null;$('auth').classList.add('on');showA('aW')}
+function signOut(){toggleMenu(false);$('reqs').classList.remove('on');$('mail').classList.remove('on');closeSheet();role=org=null;$('auth').classList.add('on');showA('aW')}
 function viewOnMap(){if(!added){added=true;const onTE=pick.co==TE;for(let i=0;i<3;i++)addUPin(onTE?[41.7592-0.0008*i,-83.5910+0.0032*i]:along(5.6+i*0.3),'nmn'[i],20+i,true,{co:pick.co,terr:pick.terr,cir:pick.cir,pole:'NEW-0'+(1+i)})}
 go('utility');setStats();fillSel();$('q').value='';$('fTerr').value='';$('fCir').value='';applyFilter();map.flyTo(pick.co==TE?[41.7584,-83.5878]:along(5.9),15)}
 btns();
